@@ -34,6 +34,12 @@ module.exports = (temperatureAggregator) => {
         });
       }
 
+      if (endDate.diff(startDate, "days") > 30) {
+        return res.status(400).json({
+          error: "Date range cannot be more than 30 days",
+        });
+      }
+
       const candlesticks = temperatureAggregator.getCandlesticks(
         city,
         startDate.valueOf(),
