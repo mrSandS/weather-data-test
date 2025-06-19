@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Candlestick Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.1.1/dist/chartjs-chart-financial.min.js"></script>
+    <script>
+        // Register the candlestick elements
+        Chart.register({
+            id: 'candlestick',
+            element: 'CandlestickElement',
+            controller: 'CandlestickController'
+        });
+    </script>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            height: 600px;
+            position: relative;
+        }
+        select, input, button {
+            margin: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Candlestick Chart</h1>
+        <div class="controls">
+            <select id="citySelect">
+                <option value="Berlin">Berlin</option>
+                <option value="London">London</option>
+                <option value="Paris">Paris</option>
+            </select>
+            <input type="date" id="startTime">
+            <input type="date" id="endTime">
+            <button onclick="fetchData()">Update Chart</button>
+        </div>
+        <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 
