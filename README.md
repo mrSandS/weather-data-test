@@ -29,3 +29,8 @@ Navigate to `http://localhost:3000` in your browser.
 - **Weather Simulator**: Generating temperature data for multiple cities
 - **Express Server**: Aggregating data into hourly OHLC candlesticks
 - **Frontend Chart**: Interactive candlestick visualization with Chart.js
+
+## Important Notes
+
+- **Chart Display**: The chart requires at least two candlesticks to display properly.
+To generate mock data, uncomment the generateRandomWeatherData() function call in weather_stream_simulator.js.
