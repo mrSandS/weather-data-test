@@ -58,12 +58,27 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-// Authentication middleware would be applied here
-// Example:
+// ===== AUTHORIZATION HEADERS CHECKING =====
+// This middleware would validate JWT tokens or API keys from Authorization header
 // const authMiddleware = require('./src/middleware/auth');
 // app.use(authMiddleware);
+
+// ===== USER IDENTITY PARSING =====
+// This middleware would extract user info from JWT and attach to req.user
+// const userIdentityMiddleware = require('./src/middleware/userIdentity');
+// app.use(userIdentityMiddleware);
+
+// ===== ROLE-BASED ACCESS CONTROL =====
+// This middleware would check user roles and permissions
+// const roleMiddleware = require('./src/middleware/roles');
+// app.use(roleMiddleware);
+
+// If role should be restricted for specific endpoints,
+// middleware for that endpoint should be added on a route level
+// Example:
+// app.use("/api/temperature", middleware, router);
 
 // Routes
 app.use("/api/temperature", temperatureRoutes(temperatureAggregator));
