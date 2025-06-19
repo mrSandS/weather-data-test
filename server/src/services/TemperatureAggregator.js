@@ -31,12 +31,9 @@ class TemperatureAggregator {
       return [];
     }
 
-    const start = moment(startTime).startOf("hour").valueOf();
-    const end = moment(endTime).endOf("hour").valueOf();
-    
     const cityData = this.cityCandlesticks.get(city);
     return Array.from(cityData.entries())
-      .filter(([timestamp]) => timestamp >= start && timestamp <= end)
+      .filter(([timestamp]) => timestamp >= startTime && timestamp < endTime)
       .map(([, candlestick]) => candlestick.toJSON())
       .sort((a, b) => a.timestamp - b.timestamp);
   }

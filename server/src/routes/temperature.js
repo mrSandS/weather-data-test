@@ -7,7 +7,7 @@ module.exports = (temperatureAggregator) => {
     router.get('/:city/range', (req, res) => {
         const { city } = req.params;
         const { start, end } = req.query;
-        
+
         if (!start || !end) {
             return res.status(400).json({ 
                 error: 'Both start and end parameters are required' 
@@ -15,19 +15,19 @@ module.exports = (temperatureAggregator) => {
         }
 
         try {
-            const startTime = moment(start, 'YYYY-MM-DD');
-            const endTime = moment(end, 'YYYY-MM-DD');
+            const startDate = moment(start).startOf("day");
+            const endDate = moment(end).endOf("day");
 
-            if (!startTime.isValid() || !endTime.isValid()) {
+            if (!startDate.isValid() || !endDate.isValid()) {
                 return res.status(400).json({ 
-                    error: 'Invalid date format. Use YYYY-MM-DD format' 
+                    error: 'Invalid date format. Use YYYY-MM-DD format'
                 });
             }
 
             const candlesticks = temperatureAggregator.getCandlesticks(
                 city,
-                startTime.valueOf(),
-                endTime.valueOf()
+                startDate.valueOf(),
+                endDate.valueOf()
             );
 
             res.json(candlesticks);
