@@ -13,7 +13,7 @@ yarn install
 ```bash
 yarn simulator
 ```
-This generates temperature data at 10-20 events/sec for Berlin, London, and Paris.
+This generates temperature data at ~10 events/sec for different cities.
 
 ### 3. Start Express Server
 ```bash
