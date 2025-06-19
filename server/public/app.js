@@ -23,23 +23,22 @@ async function fetchData() {
       `/api/temperature/${city}/range?start=${startTime}&end=${endTime}`
     );
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      throw new Error(errorData.error);
     }
     const data = await response.json();
 
     if (!Array.isArray(data)) {
-      console.error("Expected array but got:", typeof data);
-      return;
+      throw new Error("Expected array but got:", typeof data);
     }
 
     if (data.length === 0) {
-      console.log("No data available for the selected time range");
-      return;
+      throw new Error("No data available for the selected time range");
     }
 
     createChart(data);
   } catch (error) {
-    console.error("Error fetching data:", error);
+    alert(error);
   }
 }
 
