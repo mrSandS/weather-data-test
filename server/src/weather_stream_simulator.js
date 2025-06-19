@@ -54,7 +54,7 @@ wss.on("connection", (ws) => {
 
 function generateRandomWeatherData() {
     // Base time plus random offset (up to 12 hours)
-    const baseTime = new Date("2025-06-18T13:00:00Z");
+    const baseTime = new Date();
     const randomOffset = Math.floor(Math.random() * 12 * 3600 * 1000); // Random milliseconds up to 12 hours
     const randomTime = new Date(baseTime.getTime() + randomOffset);
 
