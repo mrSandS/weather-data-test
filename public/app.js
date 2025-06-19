@@ -18,6 +18,16 @@ async function fetchData() {
   const startTime = document.getElementById("startTime").value;
   const endTime = document.getElementById("endTime").value;
 
+  if (!city || !startTime || !endTime) {
+    alert("City and date range should be chosen");
+    return;
+  }
+
+  if (startTime > endTime) {
+    alert("Start date should be before end date");
+    return;
+  }
+
   try {
     const response = await fetch(
       `/api/temperature/${city}/range?start=${startTime}&end=${endTime}`
