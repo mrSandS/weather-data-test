@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const WebSocket = require("ws");
+const path = require("path");
 const TemperatureAggregator = require("./src/services/TemperatureAggregator");
 const temperatureRoutes = require("./src/routes/temperature");
 
@@ -22,7 +23,6 @@ function connectWebSocket() {
   weatherWs.on("message", (data) => {
     try {
       const event = JSON.parse(data);
-      // console.log("Received weather event:", event);
       if (event.city && event.temperature && event.timestamp) {
         temperatureAggregator.processTemperature(
           event.city,
@@ -41,7 +41,6 @@ function connectWebSocket() {
 
   weatherWs.on("close", () => {
     console.log("Disconnected from weather stream");
-    // Attempt to reconnect after 5 seconds
     setTimeout(() => {
       console.log("Attempting to reconnect...");
       connectWebSocket();
@@ -57,6 +56,9 @@ const weatherWs = connectWebSocket();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Authentication middleware would be applied here
 // Example:
