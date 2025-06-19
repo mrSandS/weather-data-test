@@ -25,11 +25,13 @@ wss.on("connection", (ws) => {
     const city = cityNames[Math.floor(Math.random() * cityNames.length)];
     const [lat, lon] = cities[city];
     try {
-      // const response = await fetch(
-      //   `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
-      // );
-      // const data = await response.json();
-      const data = generateRandomWeatherData();
+      const response = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+      );
+      const data = await response.json();
+
+      // Generating mock weather data with random time for testing
+      // const data = generateRandomWeatherData();
       const weather = data.current_weather;
       if (weather) {
         const event = {
